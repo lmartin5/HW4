@@ -204,8 +204,8 @@ Desc:     The file contains a basic flashcard quiz app,
                     else {
                         shuffledQuestions = [...questions]
                     }
+                    shuffledQuestionsCopy = [...shuffledQuestions]
                 }
-                shuffledQuestionsCopy = [...shuffledQuestions]
 
                 if (timed && !gameStarted) {
                     const timerDiv = document.createElement("div")
@@ -343,7 +343,7 @@ Desc:     The file contains a basic flashcard quiz app,
                         { text: "Horns on its nose and forehead", correct: false },
                         { text: "Spiked ball on the end of its tail", correct: false }
                     ],
-                    info: "Stegosaurus had a row of spiked plates down its back, giving it ample from large predators attacking from above."
+                    info: "Stegosaurus had a row of spiked plates down its back, giving it ample protection from large predators attacking from above."
                 },
                 {
                     question: "What does dinosaur mean in Greek?",
