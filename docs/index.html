@@ -15,7 +15,8 @@ Desc:     The file contains a basic flashcard quiz app,
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Quiz App</title>
+    <link rel="icon" href="triceratops.png">
+    <title>Dinosaur Quiz App</title>
     <style>
         *,
         *::before,
@@ -144,7 +145,7 @@ Desc:     The file contains a basic flashcard quiz app,
             let timed = timedBox.checked
             let removeCorrect = removeCorrectBox.checked
             let gameStarted = false
-            let shuffledQuestions, currentQuestionIndex
+            let shuffledQuestions, currentQuestionIndex, shuffledQuestionsCopy
             let correctlyAnswered = []
             let timerCount = 0
             let correctAnswer = false // stores whether current question is right when changing
@@ -191,7 +192,7 @@ Desc:     The file contains a basic flashcard quiz app,
                 }
                 
                 if (gameStarted && shuffledQuestions.length == 0) {
-                    gameStarted = false
+                    shuffledQuestions = [...shuffledQuestionsCopy]
                     correctlyAnswered = []
                 }
 
@@ -204,11 +205,12 @@ Desc:     The file contains a basic flashcard quiz app,
                         shuffledQuestions = [...questions]
                     }
                 }
+                shuffledQuestionsCopy = [...shuffledQuestions]
 
                 if (timed && !gameStarted) {
                     const timerDiv = document.createElement("div")
                     timerDiv.id = "timer-div"
-                    timerDiv.innerHTML = "<span id=\"timer-span\">0m 0s</span>"
+                    timerDiv.innerHTML = "<span id=\"timer-span\">00m 00s</span>"
                     mainContainer.appendChild(timerDiv)
                     let timer = setInterval(updateTimer, 1000)
                 }
@@ -225,6 +227,15 @@ Desc:     The file contains a basic flashcard quiz app,
                 timerSpan.style.removeProperty("background-color")
                 let mins = Math.floor(timerCount / 60)
                 let seconds = timerCount % 60
+                
+                if (mins < 10) {
+                    mins = "0" + mins
+                }
+
+                if (seconds < 10) {
+                    seconds = "0" + seconds
+                }
+
                 timerSpan.innerText = `${mins}m ${seconds}s`
 
                 if (timerCount >= 30 && ((timerCount % 30 == 0) || (timerCount % 30 == 2))) {
